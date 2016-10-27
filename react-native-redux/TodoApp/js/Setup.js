@@ -21,7 +21,7 @@ import { Provider } from 'react-redux';
 
 
 import TodoApp from './TodoApp';
-import Reducers from './reducers';
+import Reducers from './reducers/index'; //TODO: set a realy module
 // import configureStore from './store/configureStore';
 
 type State = {

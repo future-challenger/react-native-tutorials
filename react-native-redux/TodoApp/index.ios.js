@@ -10,28 +10,56 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView
+  ListView,
+  TouchableOpacity,
 } from 'react-native';
 
 type State = {
+  filter: string,
   dataSource: any
 };
 
+const SHOW_ALL = 'SHOW_ALL';
+const SHOW_ACTIVE = 'SHOW_ACTIVE';
+const SHOW_COMPLETED = 'SHOW_COMPLETED';
+
 export default class TodoApp extends Component {
   state: State;
+  renderFilter: (text: string, t: number) => ReactElement<{}>;
 
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      filter: SHOW_ALL,
       dataSource: ds.cloneWithRows(['item 1', 'item 2'])
     }
+
+    this.renderFilter = (filterText, type) => <TouchableOpacity
+      onPress={(type) => {
+        switch(type) {
+          case 0:
+            this.setState({filter: SHOW_ALL});
+            break;
+          case 1:
+            this.setState({filter: SHOW_ACTIVE});
+            break;
+          case 2:
+            this.setState({filter: SHOW_COMPLETED});
+            break;
+          default:
+            this.setState({filter: SHOW_ALL});
+            break;
+        }
+      }}>
+      <Text>{filterText}</Text>
+    </TouchableOpacity>
   }
   render() {
     return (
-      // <View style={styles.container}>
+      <View style={{flex: 1}}>
         <ListView
-          style={{flex: 1, marginTop: 20}}
+          style={styles.container}
           dataSource={this.state.dataSource}
           renderRow={(data, sID, rID) => {
             return (
@@ -44,25 +72,63 @@ export default class TodoApp extends Component {
               </View>
             );
           }}
-          renderSeperator={(sID, rID, highlighted) => <View
+          renderSeparator={(sID, rID, highlighted) => <View
             key={`${sID}-${rID}`}
             style={{
               height: 1,
-              backgroundColor: highlighted ? 'black' : 'red',
-            }}
-          />}
+              backgroundColor: 'black',
+            }}/>
+          }
         />
-      // </View>
+
+        <View style={{height: 50,
+          borderTopWidth: 1,
+          borderTopColor: '#303030',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between'}}>
+          <View style={{flex: 1, alignItems: 'center'}}>{this.renderFilter('All', 0)}</View>
+          <View style={{flex: 1, alignItems: 'center'}}>{this.renderFilter('Active', 1)}</View>
+          <View style={{flex: 1, alignItems: 'center'}}>{this.renderFilter('Completed', 2)}</View>
+        </View>
+      </View>
     );
   }
 }
 
+const todoItems = [
+  {
+    id: 0,
+    text: '',
+    completed: false
+  },
+  {
+    id: 1,
+    text: '',
+    completed: false
+  },
+  {
+    id: 2,
+    text: '',
+    completed: false
+  },
+  {
+    id: 3,
+    text: '',
+    completed: false
+  },
+  {
+    id: 4,
+    text: '',
+    completed: false
+  }
+];
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginTop: 20,
   },
   row: {
     flex: 1,
