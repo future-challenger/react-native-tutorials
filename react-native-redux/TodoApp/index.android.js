@@ -9,23 +9,29 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ListView
 } from 'react-native';
 
 export default class TodoApp extends Component {
+  constructor() {
+    super();
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(['item 1', 'item 2'])
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(data, sID, rID) => <Text>{data}</Text>}
+          renderSeperator={(sID, rID) => <View
+            key={`${sID}-${rID}`}
+            style={{backgroundColor: 'black', height: 1}}
+          />}
+        />
       </View>
     );
   }

@@ -11,8 +11,13 @@
  *
  * @flow
  */
+ type State = {
+   id: ?string,
+   text: ?string,
+   completed: ?boolean
+ }
 
-const todo = (state = {}, action) => {
+const todo = (state: State = {id: '', text: '', completed: false}, action) => {
   switch(action.type) {
     case 'ADD_TODO':
       return {

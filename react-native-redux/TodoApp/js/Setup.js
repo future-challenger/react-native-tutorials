@@ -20,9 +20,14 @@ import {
 import { Provider } from 'react-redux';
 
 
-import TodoApp from 'TodoApp';
+import TodoApp from './TodoApp';
 import Reducers from './reducers';
 // import configureStore from './store/configureStore';
+
+type State = {
+  isLoading: boolean,
+  store: any
+};
 
 function configureStore() {
 
@@ -31,8 +36,10 @@ function configureStore() {
 function setup(): ReactClass<{}> {
 
   class Root extends React.Component {
+    state: State;
+
     constructor() {
-      suepr();
+      super();
 
       this.state = {
         isLoading: false,
