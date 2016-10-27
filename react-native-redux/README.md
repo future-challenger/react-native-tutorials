@@ -1,4 +1,4 @@
-##Redux with React Native
+##React Native with Redux
 
 This app mostly looks like [This One][1]. According to the article, all visible to-do items will show in a list. You can add one, and search items by enter a filter string.
 
