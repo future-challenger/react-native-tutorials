@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 Uncle Charlie, Inc.
+ * Copyright 2016 Uncle Charlie
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -13,13 +13,19 @@
  */
 
 import React from 'react';
-import {Provider} from 'react-redux';
+import {
+  createStore,
+  combineReducers
+} from 'redux';
+import { Provider } from 'react-redux';
+
 
 import TodoApp from 'TodoApp';
+import Reducers from './reducers';
 // import configureStore from './store/configureStore';
 
 function configureStore() {
-  
+
 }
 
 function setup(): ReactClass<{}> {
