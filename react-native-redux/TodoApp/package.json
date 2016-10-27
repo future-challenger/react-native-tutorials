@@ -1,0 +1,15 @@
+{
+  "name": "react-native-todo",
+  "version": "1.0.0",
+  "description": "React Todo app in react native",
+  "main": "index.ios.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "redux"
+  ],
+  "author": "Uncle Charlie",
+  "license": "MIT"
+}
