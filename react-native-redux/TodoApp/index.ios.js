@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import Setup from './js/Setup';
+
 export default class TodoApp extends Component {
   render() {
     return (
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('TodoApp', () => TodoApp);
+AppRegistry.registerComponent('TodoApp', Setup);
