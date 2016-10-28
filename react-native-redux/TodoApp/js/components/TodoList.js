@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * React Native Redux sample TodoApp
  * https://github.com/future-challenger/react-native-tutorials/tree/dev/react-native-redux/TodoApp
  * @flow
  */
@@ -75,9 +75,16 @@ TodoList.propTypes = {
 
 const styles = StyleSheet.create({
   row: {
-
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#F6F6F6',
+  },
+  thumb: {
+    width: 64,
+    height: 64,
   },
   text: {
-
-  }
+    flex: 1,
+  },
 });

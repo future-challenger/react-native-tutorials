@@ -1,14 +1,6 @@
 /**
- * Copyright 2016 Uncle Charlie
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE
- *
+ * React Native Redux sample TodoApp
+ * https://github.com/future-challenger/react-native-tutorials/tree/dev/react-native-redux/TodoApp
  * @flow
  */
 
@@ -18,6 +10,8 @@ import {
   NavigationExperimental
 } from 'react-native';
 
+import TodoList from '../components/TodoList';
+import TodoDetail from '../components/TodoDetail';
 
 const {
   CardStack: NavigationCardStack,
@@ -39,10 +33,11 @@ export default class EXNavigator extends React.Component {
     const key = sceneProps.scene.route.key;
     switch (key) {
       case 'home':
-        return ();
-        break;
+        return <TodoList />;
+      case 'detail':
+        return <TodoDetail />;
       default:
-
+        return <TodoList />;
     }
   }
 

@@ -36,6 +36,7 @@ export default class TodoApp extends Component {
   state: State;
   renderFilter: (text: string, t: number) => ReactElement<{}>;
   _onNavigationChange: (type: string) => void;
+  _exit: () => void;
 
   constructor() {
     super();
@@ -91,7 +92,7 @@ export default class TodoApp extends Component {
     }
   }
 
-  _exit(): void {
+  _exit() {
     this.props.onExit && this.props.onExit();
   }
 
