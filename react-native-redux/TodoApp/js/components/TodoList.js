@@ -26,7 +26,7 @@ export default class TodoList extends React.Component {
 
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows()
+      dataSource: ds.cloneWithRows(['item 1', 'item 2'])
     };
 
     this._renderRow = this._renderRow.bind(this);

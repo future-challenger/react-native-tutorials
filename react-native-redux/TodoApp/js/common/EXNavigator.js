@@ -102,7 +102,7 @@ export default class EXNavigator extends React.Component {
     return (
       <NavigationCardStack
         onNavigateBack={this._handleBackAction}
-        navigationState={this._handleAction}
+        navigationState={this.state.navigationState}
         renderScene={this._renderScene}
         style={styles.navigator}
       />

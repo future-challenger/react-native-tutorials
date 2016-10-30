@@ -32,11 +32,13 @@ const {
   StateUtils: NavigationStateUtils,
 } = NavigationExperimental;
 
+import TodoDetail from './js/components/TodoDetail';
+import TodoList from './js/components/TodoList';
+
 export default class TodoApp extends Component {
   state: State;
   renderFilter: (text: string, t: number) => ReactElement<{}>;
-  _onNavigationChange: (type: string) => void;
-  _exit: () => void;
+  _renderRoute: (key: string) => React.Element<*>;
 
   constructor() {
     super();
@@ -70,39 +72,31 @@ export default class TodoApp extends Component {
       <Text>{filterText}</Text>
     </TouchableOpacity>
 
-    this._onNavigationChange = this._onNavigationChange.bind(this);
-    this._exit = this._exit.bind(this);
+    this._renderRoute = this._renderRoute.bind(this);
   }
 
-  _onNavigationChange(type) {
-    let {navigationState} = this.state;
-
-    switch(type) {
-      case 'push':
-        const route = {key: 'Route - ' + Date.now()};
-        navigationState = NavigationStateUtils.push(navigationState, route);
-        break;
-      case 'pop':
-        navigationState = NavigationStateUtils.pop(navigationState);
-        break;
+  _renderRoute(key) {
+    switch(key) {
+      case 'Home':
+        return (
+          <TodoList />
+        );
+      case 'Detail':
+        return (
+          <TodoDetail />
+        );
+      default:
+        return (
+          <TodoList />
+        );
     }
-
-    if (this.state.navigationState !== navigationState) {
-      this.setState({navigationState});
-    }
-  }
-
-  _exit() {
-    this.props.onExit && this.props.onExit();
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
         <EXNavigator
-          navigationState={this.state.navigationState}
-          onNavigationChange={this._onNavigationChange}
-          onExit={this._exit}
+          renderRoute={this._renderRoute}
          />
       </View>
     );
