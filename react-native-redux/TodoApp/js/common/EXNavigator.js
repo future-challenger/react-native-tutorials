@@ -13,8 +13,10 @@ import {
 
 import TodoList from '../components/TodoList';
 import TodoDetail from '../components/TodoDetail';
+import EXNavigatorHeader from './EXNavigatorHeader';
 
 const {
+  Header: NavigationHeader,
   CardStack: NavigationCardStack,
   StateUtils: NavigationStateUtils,
 } = NavigationExperimental;
@@ -57,6 +59,7 @@ export default class EXNavigator extends React.Component {
   _handleAction: (action: Action) => boolean;
   _handleBackAction: () => boolean;
   _renderRoute: (key: string) => React.Element<*>;
+  _renderHeader: (sceneProps: Object) => React.Element<*>;
 
   constructor(props: any, context: any) {
     super(props, context);
@@ -68,6 +71,8 @@ export default class EXNavigator extends React.Component {
     this._renderScene = this._renderScene.bind(this);
     this._handleAction = this._handleAction.bind(this);
     this._handleBackAction = this._handleBackAction.bind(this, {type: 'pop'});
+    this._renderRoute = this._renderRoute.bind(this);
+    this._renderHeader = this._renderHeader.bind(this);
   }
 
   _handleAction(action) {
@@ -86,16 +91,22 @@ export default class EXNavigator extends React.Component {
   }
 
   _renderRoute(key) {
-    return this.props.renderRoute(key);
+    const component = this.props.renderRoute(key);
+    return React.cloneElement(component, {navigate: this._handleAction});
   }
 
   _renderScene(sceneProps) {
     const component = this._renderRoute(sceneProps.scene.route.key);
     return (
-      <View>
+      <View style={{flex: 1}}>
         {component}
       </View>
     );
+  }
+
+  _renderHeader(sceneProps) {
+    let attrs = Object.assign({}, sceneProps, {navigate: this._handleAction});
+    return <EXNavigatorHeader {...attrs} />;
   }
 
   render() {
@@ -104,6 +115,7 @@ export default class EXNavigator extends React.Component {
         onNavigateBack={this._handleBackAction}
         navigationState={this.state.navigationState}
         renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
         style={styles.navigator}
       />
     );

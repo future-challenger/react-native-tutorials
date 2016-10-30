@@ -9,7 +9,8 @@ import {
   View,
   Text,
   ListView,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native';
 
 type State = {
@@ -37,9 +38,15 @@ export default class TodoList extends React.Component {
     return (
       <View>
         <View style={styles.row}>
-          <Text style={styles.text}>
-            {data + ' - '}
-          </Text>
+          <TouchableHighlight onPress={
+            () => {
+              console.log('hello nav');
+              this.props.navigate({type: 'push', key: 'Detail'});
+          }}>
+            <Text style={styles.text}>
+              {data + ' - '}
+            </Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -51,7 +58,7 @@ export default class TodoList extends React.Component {
         key={`${sID}-${rID}`}
         style={{
           height: 1,
-          backgroundColor: 'black',
+          backgroundColor: '#D5D5D5',
         }}
       />
     );

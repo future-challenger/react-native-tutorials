@@ -78,17 +78,11 @@ export default class TodoApp extends Component {
   _renderRoute(key) {
     switch(key) {
       case 'Home':
-        return (
-          <TodoList />
-        );
+        return <TodoList />;
       case 'Detail':
-        return (
-          <TodoDetail />
-        );
+        return <TodoDetail />;
       default:
-        return (
-          <TodoList />
-        );
+        return <TodoList />;
     }
   }
 
