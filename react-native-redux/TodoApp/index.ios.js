@@ -96,10 +96,6 @@ export default class TodoApp extends Component {
     this.props.onExit && this.props.onExit();
   }
 
-  handleBackAction(): boolean {
-    return this._onNavigationChange('pop');
-  }
-
   render() {
     return (
       <View style={{flex: 1}}>
