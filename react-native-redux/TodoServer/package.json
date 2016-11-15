@@ -1,0 +1,27 @@
+{
+  "name": "TodoServer",
+  "version": "0.1.0",
+  "description": "Server of TodoApp",
+  "main": "index.js",
+  "author": "Uncle Charlie",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel index.js -o app.js"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "koa": "2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "flow-bin": "^0.35.0",
+    "iflow-chartist": "^1.0.3",
+    "iflow-koa": "^1.1.21",
+    "iflow-koa-bodyparser": "^1.0.6",
+    "iflow-koa-router": "^1.1.21"
+  }
+}
