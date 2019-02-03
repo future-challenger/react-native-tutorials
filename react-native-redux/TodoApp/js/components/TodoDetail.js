@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-export default class TodoDetail extends React.Component {
+export default class TodoDetail extends React.PureComponent {
   state: { completed: boolean };
 
   constructor(props: any) {
@@ -17,13 +17,17 @@ export default class TodoDetail extends React.Component {
       completed: this.props.completed,
     };
   }
-  lintError(){}
+
+  handlePress() {
+    console.log('todo detail');
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <Text>{this.props.text}</Text>
         <View>
-          <TouchableOpacity onPress={() => console.log('todo detail ')}>
+          <TouchableOpacity onPress={this.handlePress}>
             <Text>{this.state.completed ? 'Completed' : 'Not completed'}</Text>
           </TouchableOpacity>
         </View>
