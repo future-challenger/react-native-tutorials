@@ -4,45 +4,53 @@
  * @flow
  */
 
- import React from 'react';
- import {
-   NavigationExperimental
- } from 'react-native';
+import React from 'react';
+import { NavigationExperimental } from 'react-native';
+import PropTypes from 'prop-types';
 
- const {
+const {
   // CardStack: NavigationCardStack,
   Header: NavigationHeader,
   // PropTypes: NavigationPropTypes,
   // StateUtils: NavigationStateUtils,
 } = NavigationExperimental;
 
- export default class EXNavigatorHeader extends React.Component {
-   _back: () => void;
-   _renderTitle: (props: Object) => React.Element<*>;
+type Prop = {
+  navigate: PropTypes.func.isRequired,
+};
 
-   constructor(props: any, context: any) {
-     super(props, context);
+export default class EXNavigatorHeader extends React.Component<Prop, {}> {
+  _back: () => void;
 
-     this._back = this._back.bind(this);
-     this._renderTitle = this._renderTitle.bind(this);
-   }
+  _renderTitle: (props: Object) => React.Element<*>;
 
-   _renderTitle(props) {
-     <NavigationHeader.Title>
-      {props.scene.route.key}
-     </NavigationHeader.Title>
-   }
+  constructor(props: any, context: any) {
+    super(props, context);
 
-   _back() {
-     this.props.navigate({type: 'pop'});
-   }
+    this._back = this._back.bind(this);
+    this._renderTitle = this._renderTitle.bind(this);
+  }
 
-   render() {
-     return (
-       <NavigationHeader
+  _renderTitle(props) {
+    return (
+      <NavigationHeader.Title>{props.scene.route.key}</NavigationHeader.Title>
+    );
+  }
+
+  _back() {
+    const { navigate } = this.props;
+    if (navigate) {
+      navigate({ type: 'pop' });
+    }
+  }
+
+  render() {
+    return (
+      <NavigationHeader
         {...this.props}
         renderTitleComponent={this._renderTitle}
-        onNavigateBack={this._back}/>
-     );
-   }
- }
+        onNavigateBack={this._back}
+      />
+    );
+  }
+}

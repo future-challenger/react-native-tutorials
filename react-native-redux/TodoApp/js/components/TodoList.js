@@ -10,24 +10,30 @@ import {
   Text,
   ListView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 type State = {
-  dataSource: any
+  dataSource: any,
 };
 
 export default class TodoList extends React.Component {
   state: State;
   _renderRow: (data: string, sID: number, rID: number) => ReactElement<*>;
-  _renderSeparator: (sID: number, rID: number, highlighted: boolean) => ReactElement<*>;
+  _renderSeparator: (
+    sID: number,
+    rID: number,
+    highlighted: boolean,
+  ) => ReactElement<*>;
 
   constructor(props: any) {
     super(props);
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
     this.state = {
-      dataSource: ds.cloneWithRows(['item 1', 'item 2'])
+      dataSource: ds.cloneWithRows(['item 1', 'item 2']),
     };
 
     this._renderRow = this._renderRow.bind(this);
@@ -38,21 +44,25 @@ export default class TodoList extends React.Component {
     return (
       <View>
         <View style={styles.row}>
-          <TouchableOpacity style={{flex: 1}} onPress={
-            () => {
+          <TouchableOpacity
+            style={{ flex: 1 }}
+            onPress={() => {
               console.log('hello nav');
-              this.props.navigate({type: 'push', key: 'Detail'});
-            }}>
-            <Text style={styles.text}>
-              {data + ' - '}
-            </Text>
+              this.props.navigate({ type: 'push', key: 'Detail' });
+            }}
+          >
+            <Text style={styles.text}>{data + ' - '}</Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 
-  _renderSeparator(sID: number, rID: number, highlighted: boolean): ReactElement<*> {
+  _renderSeparator(
+    sID: number,
+    rID: number,
+    highlighted: boolean,
+  ): ReactElement<*> {
     return (
       <View
         key={`${sID}-${rID}`}
@@ -76,9 +86,7 @@ export default class TodoList extends React.Component {
   }
 }
 
-TodoList.propTypes = {
-
-};
+TodoList.propTypes = {};
 
 const styles = StyleSheet.create({
   row: {

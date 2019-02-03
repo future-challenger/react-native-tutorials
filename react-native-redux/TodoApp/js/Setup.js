@@ -13,12 +13,8 @@
  */
 
 import React from 'react';
-import {
-  createStore,
-  combineReducers
-} from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-
 
 import TodoApp from './TodoApp';
 import Reducers from './reducers/index'; //TODO: set a realy module
@@ -26,15 +22,12 @@ import Reducers from './reducers/index'; //TODO: set a realy module
 
 type State = {
   isLoading: boolean,
-  store: any
+  store: any,
 };
 
-function configureStore() {
-
-}
+function configureStore() {}
 
 function setup(): ReactClass<{}> {
-
   class Root extends React.Component {
     state: State;
 
@@ -43,7 +36,7 @@ function setup(): ReactClass<{}> {
 
       this.state = {
         isLoading: false,
-        store: configureStore(() => this.setState({isLoading: false})),
+        store: configureStore(() => this.setState({ isLoading: false })),
       };
     }
 

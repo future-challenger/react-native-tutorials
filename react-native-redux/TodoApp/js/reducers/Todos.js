@@ -11,14 +11,17 @@
  *
  * @flow
  */
- type State = {
-   id: ?string,
-   text: ?string,
-   completed: ?boolean
- }
+type State = {
+  id: ?string,
+  text: ?string,
+  completed: ?boolean,
+};
 
-const todo = (state: State = {id: '', text: '', completed: false}, action) => {
-  switch(action.type) {
+const todo = (
+  state: State = { id: '', text: '', completed: false },
+  action,
+) => {
+  switch (action.type) {
     case 'ADD_TODO':
       return {
         id: action.id,
@@ -31,9 +34,9 @@ const todo = (state: State = {id: '', text: '', completed: false}, action) => {
       }
 
       return Object.assign({}, state, {
-        completed: !state.completed
+        completed: !state.completed,
       });
     default:
       return state;
   }
-}
+};

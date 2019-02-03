@@ -91,7 +91,7 @@ export default class TodoApp extends Component {
       <View style={{flex: 1}}>
         <EXNavigator
           renderRoute={this._renderRoute}
-         />
+        />
       </View>
     );
   }
@@ -183,4 +183,3 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('TodoApp', () => TodoApp);

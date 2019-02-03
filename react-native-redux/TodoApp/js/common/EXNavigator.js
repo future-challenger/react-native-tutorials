@@ -5,11 +5,7 @@
  */
 
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  NavigationExperimental
-} from 'react-native';
+import { View, StyleSheet, NavigationExperimental } from 'react-native';
 
 import TodoList from '../components/TodoList';
 import TodoDetail from '../components/TodoDetail';
@@ -29,32 +25,32 @@ type Action = {
 type NavStateType = {
   index: number,
   key: string,
-  routes: Array<*>
+  routes: Array<*>,
 };
 
 function createReducer(initialState: NavStateType) {
   return (currentState: NavStateType = initialState, action: Action) => {
     switch (action.type) {
       case 'push':
-        return NavigationStateUtils.push(currentState, {key: action.key});
+        return NavigationStateUtils.push(currentState, { key: action.key });
       case 'pop':
-        return currentState.index > 0 ?
-          NavigationStateUtils.pop(currentState) :
-            currentState;
+        return currentState.index > 0
+          ? NavigationStateUtils.pop(currentState)
+          : currentState;
       default:
         return currentState;
-      }
-   }
+    }
+  };
 }
 
 const navigationReducer = createReducer({
   index: 0,
   key: 'APP',
-  routes: [{key: 'Home'}],
+  routes: [{ key: 'Home' }],
 });
 
 export default class EXNavigator extends React.Component {
-  state: {navigationState: NavStateType}
+  state: { navigationState: NavStateType };
   _renderScene: (sceneProps: Object) => ?React.Element<*>;
   _handleAction: (action: Action) => boolean;
   _handleBackAction: () => boolean;
@@ -65,12 +61,12 @@ export default class EXNavigator extends React.Component {
     super(props, context);
 
     this.state = {
-      navigationState: navigationReducer(undefined, {})
-    }
+      navigationState: navigationReducer(undefined, {}),
+    };
 
     this._renderScene = this._renderScene.bind(this);
     this._handleAction = this._handleAction.bind(this);
-    this._handleBackAction = this._handleBackAction.bind(this, {type: 'pop'});
+    this._handleBackAction = this._handleBackAction.bind(this, { type: 'pop' });
     this._renderRoute = this._renderRoute.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
   }
@@ -81,31 +77,27 @@ export default class EXNavigator extends React.Component {
       return false;
     }
 
-    this.setState({navigationState: newState});
+    this.setState({ navigationState: newState });
 
     return true;
   }
 
   _handleBackAction(): boolean {
-    return this._handleAction({type:'pop'});
+    return this._handleAction({ type: 'pop' });
   }
 
   _renderRoute(key) {
     const component = this.props.renderRoute(key);
-    return React.cloneElement(component, {navigate: this._handleAction});
+    return React.cloneElement(component, { navigate: this._handleAction });
   }
 
   _renderScene(sceneProps) {
     const component = this._renderRoute(sceneProps.scene.route.key);
-    return (
-      <View style={{flex: 1}}>
-        {component}
-      </View>
-    );
+    return <View style={{ flex: 1 }}>{component}</View>;
   }
 
   _renderHeader(sceneProps) {
-    let attrs = Object.assign({}, sceneProps, {navigate: this._handleAction});
+    let attrs = Object.assign({}, sceneProps, { navigate: this._handleAction });
     return <EXNavigatorHeader {...attrs} />;
   }
 
