@@ -10,88 +10,54 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView,
   TouchableOpacity,
-  NavigationExperimental
 } from 'react-native';
 
-import EXNavigator from './js/common/EXNavigator';
-
-type State = {
-  filter: string,
-  dataSource: any,
-  navigationState: any,
-};
-
-const SHOW_ALL = 'SHOW_ALL';
-const SHOW_ACTIVE = 'SHOW_ACTIVE';
-const SHOW_COMPLETED = 'SHOW_COMPLETED';
-
-const {
-  CardStack: NavigationCardStack,
-  StateUtils: NavigationStateUtils,
-} = NavigationExperimental;
-
-import TodoDetail from './js/components/TodoDetail';
-import TodoList from './js/components/TodoList';
+import AppNavigator from './js/AppNavigator';
 
 export default class TodoApp extends Component {
-  state: State;
-  renderFilter: (text: string, t: number) => ReactElement<{}>;
-  _renderRoute: (key: string) => React.Element<*>;
-
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      filter: SHOW_ALL,
-      dataSource: ds.cloneWithRows(['item 1', 'item 2']),
-      navigationState: {
-        index: 0,
-        routes: [{key: 'Initial Scene'}],
-      }
-    }
-
-    this.renderFilter = (filterText, type) => <TouchableOpacity
-      onPress={(type) => {
-        switch(type) {
-          case 0:
-            this.setState({filter: SHOW_ALL});
-            break;
-          case 1:
-            this.setState({filter: SHOW_ACTIVE});
-            break;
-          case 2:
-            this.setState({filter: SHOW_COMPLETED});
-            break;
-          default:
-            this.setState({filter: SHOW_ALL});
-            break;
-        }
-      }}>
-      <Text>{filterText}</Text>
-    </TouchableOpacity>
-
-    this._renderRoute = this._renderRoute.bind(this);
   }
 
-  _renderRoute(key) {
-    switch(key) {
-      case 'Home':
-        return <TodoList />;
-      case 'Detail':
-        return <TodoDetail />;
-      default:
-        return <TodoList />;
-    }
-  }
+    // this.renderFilter = (filterText, type) => <TouchableOpacity
+    //   onPress={(type) => {
+    //     switch(type) {
+    //       case 0:
+    //         this.setState({filter: SHOW_ALL});
+    //         break;
+    //       case 1:
+    //         this.setState({filter: SHOW_ACTIVE});
+    //         break;
+    //       case 2:
+    //         this.setState({filter: SHOW_COMPLETED});
+    //         break;
+    //       default:
+    //         this.setState({filter: SHOW_ALL});
+    //         break;
+    //     }
+    //   }}>
+    //   <Text>{filterText}</Text>
+    // </TouchableOpacity>
+
+    // this._renderRoute = this._renderRoute.bind(this);
+  // }
+
+  // _renderRoute(key) {
+  //   switch(key) {
+  //     case 'Home':
+  //       return <TodoList />;
+  //     case 'Detail':
+  //       return <TodoDetail />;
+  //     default:
+  //       return <TodoList />;
+  //   }
+  // }
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <EXNavigator
-          renderRoute={this._renderRoute}
-         />
+        <AppNavigator />
       </View>
     );
   }
@@ -183,4 +149,3 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('TodoApp', () => TodoApp);
